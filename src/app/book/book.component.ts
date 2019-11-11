@@ -12,6 +12,9 @@ export class BookComponent implements OnInit {
   ngOnInit() {
   }
 
+  minimum: number = 1;
+  maximum: number = Number.MAX_VALUE;
+
   key: string = 'price';
   descending: boolean = false;  
   selectedSort: string = "Price Ascending";
@@ -23,6 +26,19 @@ export class BookComponent implements OnInit {
   }
 
   p: number = 1;
+
+  filter(min, max) {
+    console.log(min)
+    console.log(max)
+    if (!min)
+      min = 1;
+    if (!max)
+      max = Number.MAX_VALUE;
+    console.log(min)
+    console.log(max)
+    this.minimum = min;
+    this.maximum = max;
+  }
 
   books = [
   {
