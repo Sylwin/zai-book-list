@@ -13,17 +13,17 @@
     		<div class="ml-auto mr-4">
     			<div ngbDropdown>
     				<button class="btn btn-outline-secondary" id="dropdownBasic1" ngbDropdownToggle>
-    					Sorted By <span class="font-weight-bold">{{key}}</span>
+    					Sorted By <span class="font-weight-bold">{{selectedSort}}</span>
     				</button>
     				<div ngbDropdownMenu aria-labelledby="dropdownBasic1">
-    					<button ngbDropdownItem (click)="sort('Price Descending', true)">Price Descending</button>
-    					<button ngbDropdownItem (click)="sort('Price Ascending', false)">Price Ascending</button>
-    					<button ngbDropdownItem (click)="sort('Title A-Z', false)">Title A-Z</button>
-    					<button ngbDropdownItem (click)="sort('Title Z-A', true)">Title Z-A</button>
-    					<button ngbDropdownItem (click)="sort('Author A-Z', false)">Author A-Z</button>
-    					<button ngbDropdownItem (click)="sort('Author Z-A', true)">Author Z-A</button>
-    					<button ngbDropdownItem (click)="sort('Year Descending', true)">Year Descending</button>
-    					<button ngbDropdownItem (click)="sort('Year Ascending', false)">Year Ascending</button>
+    					<button ngbDropdownItem (click)="sort('price', true, 'Price Descending')">Price Descending</button>
+    					<button ngbDropdownItem (click)="sort('price', false, 'Price Ascending')">Price Ascending</button>
+    					<button ngbDropdownItem (click)="sort('title', false, 'Title A-Z')">Title A-Z</button>
+    					<button ngbDropdownItem (click)="sort('title', true, 'Title Z-A')">Title Z-A</button>
+    					<button ngbDropdownItem (click)="sort('author', false, 'Author A-Z')">Author A-Z</button>
+    					<button ngbDropdownItem (click)="sort('author', true, 'Author Z-A')">Author Z-A</button>
+    					<button ngbDropdownItem (click)="sort('year', true, 'Year Descending')">Year Descending</button>
+    					<button ngbDropdownItem (click)="sort('year', false, 'Year Ascending')">Year Ascending</button>
     				</div>
     			</div>
     		</div>
