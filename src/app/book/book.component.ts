@@ -12,13 +12,15 @@ export class BookComponent implements OnInit {
   ngOnInit() {
   }
 
-  key: string = 'price';
+  key: string = 'Price Ascending';
   descending: boolean = false;
 
   sort(key, descending) {
   	this.key = key;
   	this.descending = descending;
   }
+
+  p: number = 1;
 
   books = [
   	{
