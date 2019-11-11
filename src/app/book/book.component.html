@@ -29,35 +29,43 @@
     		</div>
     	</div>   
 
-    	<div *ngFor="let book of books | orderBy: key : descending | paginate: {itemsPerPage: 5, currentPage: p}">
+    	<div class="row col-md-6 ml-auto mb-3">
+    		<form class="form-inline" #priceForm="ngForm" (ngSubmit)="submitFilter(priceForm.form);">
+                <input type="text" class="form-control" placeholder="Min Price" name="min" ngModel #minPrice="ngModel">
+                <input type="text" class="form-control" placeholder="Max Price" name="max" ngModel #maxPrice="ngModel">
+                <button type="submit" class="btn btn-light">Filter</button>
+            </form>
+        </div>
 
-    		<div class="row">
-    			<div class="col-md-12 mt-2">
-    				<div class="d-flex">
-    					<h3>{{book.title}}</h3>
-    					<h4 class="ml-auto mr-3">Price: ${{book.price}}</h4>
-    				</div>
-    				<div>
-    					<div class="mt-2 mb-3">
-    						<a href="{{book.image}}">Image URL</a>
-    					</div>
-    					<p>{{book.description}}</p>
-    					<div class="d-flex">
-    						<p>Author: {{book.author}};  {{book.city}}, {{book.year}}</p>
-    						<div class="ml-auto mr-3">
-    							<div class="btn-group" role="group" aria-label="Button group example">
-    								<button type="button" class="btn btn-primary">Edit Book</button>
-    								<button type="button" class="btn btn-danger">Delete Book</button>
-    							</div>
-    						</div>
-    					</div>
-    				</div>
-    			</div>
-    		</div>
+        <div *ngFor="let book of books | orderBy: key : descending | filter: books : minimum : maximum | paginate: {itemsPerPage: 5, currentPage: p}">
 
-    		<hr>
-    	</div>
-
-    	<pagination-controls (pageChange)="p = $event" class="d-flex justify-content-center"></pagination-controls>
-
+          <div class="row">
+           <div class="col-md-12 mt-2">
+            <div class="d-flex">
+             <h3>{{book.title}}</h3>
+             <h4 class="ml-auto mr-3">Price: ${{book.price}}</h4>
+         </div>
+         <div>
+             <div class="mt-2 mb-3">
+              <a href="{{book.image}}">Image URL</a>
+          </div>
+          <p>{{book.description}}</p>
+          <div class="d-flex">
+              <p>Author: {{book.author}};  {{book.city}}, {{book.year}}</p>
+              <div class="ml-auto mr-3">
+               <div class="btn-group" role="group" aria-label="Button group example">
+                <button type="button" class="btn btn-primary">Edit Book</button>
+                <button type="button" class="btn btn-danger">Delete Book</button>
+            </div>
+        </div>
     </div>
+</div>
+</div>
+</div>
+
+<hr>
+</div>
+
+<pagination-controls (pageChange)="p = $event" class="d-flex justify-content-center"></pagination-controls>
+
+</div>

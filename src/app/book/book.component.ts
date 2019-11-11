@@ -7,10 +7,14 @@ import { Component, OnInit } from '@angular/core';
 })
 export class BookComponent implements OnInit {
 
-  constructor() { }
+  constructor() { 
+  }
 
   ngOnInit() {
   }
+
+  minimum: number = 1;
+  maximum: number = Number.MAX_VALUE;
 
   key: string = 'price';
   descending: boolean = false;  
@@ -23,6 +27,12 @@ export class BookComponent implements OnInit {
   }
 
   p: number = 1;
+
+  submitFilter(form) {
+    console.log("click; min: " + form.value.min + "max: " + form.value.max);
+    this.minimum = form.value.min;
+    this.maximum = form.value.max;
+  }
 
   books = [
   {
