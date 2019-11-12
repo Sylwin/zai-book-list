@@ -27,31 +27,14 @@ export class BookService {
 	}
 
 	addBook(newBook: Book) {
-		console.log("book to be added: " + newBook);
-		
-		this.books = this.getBooks();
-		
-		console.log("from LS: " + this.books);
-		
-		newBook.id = this.books.length + 1;
-
 		this.books.push(newBook);
+		this.books = this.books;
 		this.saveBooksToLocalStorage();
-		
-		console.log("after save from LS: " + JSON.parse(localStorage.getItem("books")));
 	}
 
 	deleteBook(bookToBeDeleted: Book) {
-		console.log("delete book: " + bookToBeDeleted);
-		
-		this.books = this.getBooks();
-		console.log("from LS: " + this.books);
-		
-		this.books = this.books
-							.filter(book => book !== bookToBeDeleted);
+		this.books = this.books.filter(book => book !== bookToBeDeleted);
 		this.saveBooksToLocalStorage();
-		
-		console.log("after save from LS: " + JSON.parse(localStorage.getItem("books")));
 	}
 
 	editBook(bookToBeEdited: Book) {
@@ -64,7 +47,7 @@ export class BookService {
 		this.filteredBooks = this.books
 							.filter(book => book.id === bookToBeEdited.id);
 
-		this.deleteBook(this.filteredBooks);
+		this.deleteBook(this.filteredBooks.pop());
 
 		this.addBook(bookToBeEdited);
 
