@@ -19,23 +19,19 @@ export class BookComponent implements OnInit {
   descending: boolean = false;  
   selectedSort: string = "Price Ascending";
 
+  p: number = 1;
+
   sort(key, descending, selectedSort) {
   	this.key = key;
   	this.descending = descending;
     this.selectedSort = selectedSort;
   }
 
-  p: number = 1;
-
   filter(min, max) {
-    console.log(min)
-    console.log(max)
     if (!min)
       min = 1;
     if (!max)
       max = Number.MAX_VALUE;
-    console.log(min)
-    console.log(max)
     this.minimum = min;
     this.maximum = max;
   }
