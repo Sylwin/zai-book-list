@@ -1,5 +1,15 @@
 import { Component, OnInit } from '@angular/core';
 
+export interface Book {
+  title: string;
+  price: number;
+  image: string;
+  description: string;
+  author: string;
+  city: string;
+  year: number;
+}
+
 @Component({
   selector: 'app-book',
   templateUrl: './book.component.html',
@@ -36,7 +46,7 @@ export class BookComponent implements OnInit {
     this.maximum = max;
   }
 
-  books = [
+  books: Book[] = [
   {
     "title": "Book Number 1",
     "price": 15,
