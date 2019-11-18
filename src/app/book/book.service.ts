@@ -12,8 +12,9 @@ export class BookService {
 
 	constructor() {
 		this.books = JSON.parse(localStorage.getItem("books"));
-		if (!this.books || this.books.length === 0) {
+		if (!this.books) {
 			this.books = BOOKS;
+			this.setNextId(6);
 			this.saveBooksToLocalStorage();
 		}
 	}
@@ -22,37 +23,49 @@ export class BookService {
 		localStorage.setItem("books", JSON.stringify(this.books));
 	}
 
+	getBooksFromLocalStorage() {
+		return JSON.parse(localStorage.getItem("books"));
+	}
+
+	setNextId(id: number) {
+		localStorage.setItem("nextId", JSON.stringify(id));
+	}
+
+	getId() {
+		return localStorage.getItem("nextId");
+	}
+
 	getBooks() {
 		return this.books;
 	}
 
-	addBook(newBook: Book) {
-		this.books.push(newBook);
-		this.books = this.books;
+	deleteBook(bookToBeDeleted: Book) {
+		this.books = this.books
+							.filter(book => book.id !== bookToBeDeleted.id);
 		this.saveBooksToLocalStorage();
 	}
 
-	deleteBook(bookToBeDeleted: Book) {
-		this.books = this.books.filter(book => book !== bookToBeDeleted);
+	addBook(newBook: Book) {
+		newBook.id = +this.getId();
+		this.setNextId(newBook.id + 1);
+
+		this.books.push(newBook);
 		this.saveBooksToLocalStorage();
 	}
 
 	editBook(bookToBeEdited: Book) {
-		console.log("book to be edited: " + bookToBeEdited);
-	
-		this.books = this.getBooks();
+		this.books.map(book => {
+			if (book.id === bookToBeEdited.id) {
+				book = bookToBeEdited;
+			}
+		});
 		
-		console.log("from LS: " + this.books);
-
-		this.filteredBooks = this.books
-							.filter(book => book.id === bookToBeEdited.id);
-
-		this.deleteBook(this.filteredBooks.pop());
-
-		this.addBook(bookToBeEdited);
-
 		this.saveBooksToLocalStorage();
+	}
 
-		console.log("after save from LS: " + JSON.parse(localStorage.getItem("books")));
+	consoleLogBook(book: Book) {
+		return "id: " + book.id + "  title: " + book.title + "  price: " + book.price + "   author: " + book.author
+		+ "   image: " + book.image + "   city: " + book.city + "   year: " + book.year 
+		+ "   description: " + book.description;
 	}
 }

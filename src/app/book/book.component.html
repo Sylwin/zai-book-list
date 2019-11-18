@@ -8,7 +8,7 @@
 
 	<div class="row mb-4">
 		<div class="col-md-4">
-			<button type="button" class="btn btn-secondary" (click)=open(addBookModal)>Add Book</button>
+			<button type="button" class="btn btn-secondary" (click)=openAddModal()>Add Book</button>
 		</div>
 		<div class="ml-auto mr-4">
             <div ngbDropdown>
@@ -57,7 +57,7 @@
                         <p>Author: {{book.author}};  {{book.city}}, {{book.year}}</p>
                         <div class="ml-auto mr-3">
                             <div class="btn-group" role="group" aria-label="Button group example">
-                                <button type="button" class="btn btn-primary" (click)=open(editBookModal)>Edit Book</button>
+                                <button type="button" class="btn btn-primary" (click)=openEditModal(book)>Edit Book</button>
                                 <button type="button" class="btn btn-danger" (click)="deleteBook(book)">Delete Book</button>
                             </div>
                         </div>
@@ -67,61 +67,6 @@
         </div>
         <hr>
     </div>
-
-    <ng-template #addBookModal let-modal>
-        <div class="modal-header">
-            <h4 class="modal-title" id="modal-basic-title">Add New Book</h4>
-            <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
-                <span aria-hidden="true">&times;</span>
-            </button>
-        </div>
-        <div class="modal-body">
-            <form>
-                <div class="form-group">
-
-                    <label for="title">Title</label>
-                    <div class="input-group">
-                        <input type="text" id="title" class="form-control" name="title" #title>
-                    </div>
-
-                    <label for="author">Author</label>
-                    <div class="input-group">
-                        <input type="text" id="author" class="form-control" name="author" #author>
-                    </div>
-
-                    <label for="price">Price</label>
-                    <div class="input-group">
-                        <div class="input-group-prepend">
-                            <span class="input-group-text">$</span>
-                        </div>
-                        <input type="text" id="price" class="form-control" name="price" #price>
-                    </div>
-
-                    <label for="image">Image URL</label>
-                    <div class="input-group">
-                        <input type="text" id="image" class="form-control" name="image" #image>
-                    </div>
-
-                    <label for="city_year">City and Year of publication</label>
-                    <div class="input-group">
-                        <input type="text" id="city" class="form-control" name="city" #city>
-                        <input type="text" id="year" class="form-control" name="year" #year>
-                    </div>
-
-                    <label for="description">Description</label>
-                    <div class="input-group">
-                        <textarea id="description" class="form-control" name="description" #description></textarea>
-                    </div>
-
-
-                </div>
-            </form>
-        </div>
-        <div class="modal-footer">
-            <button type="button" class="btn btn-outline-dark" (click)="modal.close('Save click'); 
-                addBook(title.value, author.value, price.value, image.value, city.value, year.value, description.value);">Add Book</button>
-        </div>
-    </ng-template>
 
     <pagination-controls (pageChange)="p = $event" class="d-flex justify-content-center"></pagination-controls>
 

@@ -2,6 +2,7 @@ import { Component, OnInit, Input } from '@angular/core';
 import { Book } from './book';
 import { BookService } from './book.service';
 import { NgbModal, ModalDismissReasons } from '@ng-bootstrap/ng-bootstrap';
+import { AddBookModalComponent } from '../add-book-modal/add-book-modal.component'
 
 @Component({
   selector: 'app-book',
@@ -10,27 +11,26 @@ import { NgbModal, ModalDismissReasons } from '@ng-bootstrap/ng-bootstrap';
 })
 export class BookComponent implements OnInit {
 
+  public bookCopy: Book;
+
   books: Book[];
 
   constructor(private bookService: BookService, private modalService: NgbModal) { 
-    console.log("cons" + this.books);
-    this.books = bookService.getBooks();
-    console.log("after" + this.books);
   }
 
   ngOnInit() {
-  }  
+    this.books = this.bookService.getBooks();
+  }
 
   closeResult: string;
+  p: number = 1; 
 
-  minimum: number = 1;
-  maximum: number = Number.MAX_VALUE;
+
+//--------------  SORTING --------------
 
   key: string = 'price';
   descending: boolean = false;  
   selectedSort: string = "Price Ascending";
-
-  p: number = 1;
 
   sort(key, descending, selectedSort) {
   	this.key = key;
@@ -38,6 +38,10 @@ export class BookComponent implements OnInit {
     this.selectedSort = selectedSort;
   }
 
+//--------------  FILTERRING --------------
+
+  minimum: number = 1;
+  maximum: number = Number.MAX_VALUE;
   filter(min, max) {
     if (!min)
       min = 1;
@@ -47,44 +51,70 @@ export class BookComponent implements OnInit {
     this.maximum = max;
   }
 
-  addBook(title, author, price, image, city, year, description) {
-    let book = new Book();
-    book.id = this.books.length + 1;
-    book.title = title;
-    book.author = author;
-    book.price = price;
-    book.image = image;
-    book.city = city;
-    book.year = year;
-    book.description = description;
-    console.log(book);
-
-    this.bookService.addBook(book);
-
-    console.log(this.books);
-    this.books = this.bookService.getBooks();
-    console.log(this.books);
-  }
-
-  editBook(book: Book) {
-     //TODO
-  }
+//--------------  DELETE --------------
 
   deleteBook(book: Book) {
+    console.log("Delete book:  " + this.consoleLogBook(book));
     this.bookService.deleteBook(book);
-
-    console.log(this.books);
-    this.books = this.bookService.getBooks();
-    console.log(this.books);
+    this.books = this.bookService.getBooksFromLocalStorage();
   }
 
-  open(content) {
-    this.modalService.open(content, {ariaLabelledBy: 'modal-basic-title'}).result.then((result) => {
+//--------------  ADD --------------
+
+  addBook(book: Book) {
+    console.log("Add book:  " + this.consoleLogBook(book));
+    this.bookService.addBook(book);
+    this.books = this.bookService.getBooksFromLocalStorage();
+  } 
+
+  openAddModal() {
+    const modalRef = this.modalService.open(AddBookModalComponent);
+    
+    modalRef.componentInstance.book = new Book();
+    
+    modalRef.result.then((result) => {
       this.closeResult = `Closed with: ${result}`;
+      console.log(this.closeResult);
     }, (reason) => {
       this.closeResult = `Dismissed ${this.getDismissReason(reason)}`;
+      console.log(this.closeResult);
+    });
+
+    modalRef.componentInstance.passEntry.subscribe((receivedEntry) => {
+      this.addBook(receivedEntry);
+      console.log(receivedEntry);
     });
   }
+
+//--------------  EDIT --------------
+
+  editBook(book: Book) {
+    console.log("Edit book:  " + this.consoleLogBook(book));
+    this.bookService.editBook(book);
+    this.books = this.bookService.getBooksFromLocalStorage();
+  }
+
+  openEditModal(book) {    
+    const modalRef = this.modalService.open(AddBookModalComponent);
+        
+    modalRef.componentInstance.book = book;
+
+    modalRef.result.then((result) => {
+      this.closeResult = `Closed with: ${result}`;
+      console.log(this.closeResult);
+    }, (reason) => {
+      this.closeResult = `Dismissed ${this.getDismissReason(reason)}`;
+      console.log(this.closeResult);
+      this.books = this.bookService.getBooksFromLocalStorage();
+    });
+
+    modalRef.componentInstance.passEntry.subscribe((receivedEntry) => {
+      this.editBook(receivedEntry);
+      console.log("Received Entry: " + this.consoleLogBook(receivedEntry));
+    });
+  }
+
+//--------------  OTHER --------------
 
   private getDismissReason(reason: any): string {
     if (reason === ModalDismissReasons.ESC) {
@@ -94,6 +124,12 @@ export class BookComponent implements OnInit {
     } else {
       return  `with: ${reason}`;
     }
+  }
+
+  consoleLogBook(book: Book) {
+    return "id: " + book.id + "  title: " + book.title + "  price: " + book.price + "   author: " + book.author
+    + "   image: " + book.image + "   city: " + book.city + "   year: " + book.year 
+    + "   description: " + book.description;
   }
 
 }
