@@ -9,7 +9,9 @@ import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 export class AddBookModalComponent implements OnInit {
 
 	@Input() public book;
-	@Output() passEntry: EventEmitter<any> = new EventEmitter();
+  @Input() public type;
+
+  @Output() passEntry: EventEmitter<any> = new EventEmitter();
 
   constructor( public activeModal: NgbActiveModal) { }
 
@@ -21,4 +23,13 @@ export class AddBookModalComponent implements OnInit {
   	this.activeModal.close('Save click');
   }
 
+  isAdd() {
+    if (this.type) {
+      if (this.type === "ADD") {
+        return true;
+      } else {
+        return false;
+      }
+    }
+  }
 }

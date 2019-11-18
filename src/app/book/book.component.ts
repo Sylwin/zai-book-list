@@ -68,6 +68,7 @@ export class BookComponent implements OnInit {
   openAddModal() {
     const modalRef = this.modalService.open(AddBookModalComponent);
     
+    modalRef.componentInstance.type = "ADD";
     modalRef.componentInstance.book = new Book();
     
     modalRef.result.then((result) => {
@@ -95,6 +96,7 @@ export class BookComponent implements OnInit {
   openEditModal(book) {    
     const modalRef = this.modalService.open(AddBookModalComponent);
         
+    modalRef.componentInstance.type = "EDIT";
     modalRef.componentInstance.book = book;
 
     modalRef.result.then((result) => {
