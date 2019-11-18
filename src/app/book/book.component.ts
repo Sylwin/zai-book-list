@@ -11,8 +11,6 @@ import { AddBookModalComponent } from '../add-book-modal/add-book-modal.componen
 })
 export class BookComponent implements OnInit {
 
-  public bookCopy: Book;
-
   books: Book[];
 
   constructor(private bookService: BookService, private modalService: NgbModal) { 
