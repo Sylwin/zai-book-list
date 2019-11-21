@@ -5,7 +5,7 @@ import { Pipe, PipeTransform } from '@angular/core';
 })
 export class FilterPipe implements PipeTransform {
 
-  transform(books: any[], value: string, min: number, max: number): any[] {
+  transform(books: any[], min: number, max: number): any[] {
   		if (!books) return [];
 		if (!min) {
 			min = 1;

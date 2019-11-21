@@ -40,7 +40,7 @@
 						<div class="input-group-prepend">
 							<span class="input-group-text">$</span>
 						</div>
-						<input [(ngModel)]="book.price" type="text" id="price" name="price" class="form-control" 
+						<input [(ngModel)]="book.price" type="number" id="price" name="price" class="form-control" 
 						required #price="ngModel" pattern="[0-9]{1,}">
 					</div>
 					<div *ngIf="price.invalid && (price.dirty || price.touched)" class="alert alert-danger">
@@ -67,7 +67,7 @@
 					<div class="input-group">
 						<input [(ngModel)]="book.city" type="text" id="city" name="city" class="form-control" 
 						required #city="ngModel">
-						<input [(ngModel)]="book.year" type="text" id="year" name="year" class="form-control"
+						<input [(ngModel)]="book.year" type="number" id="year" name="year" class="form-control"
 						required #year="ngModel" pattern="(^1[0-9]{3}$)|(^[1-9][0-9]{2}$)|(^20[0-1][0-9]$)">
 					</div>
 					<div *ngIf="(city.invalid && (city.dirty || city.touched))" class="alert alert-danger">
