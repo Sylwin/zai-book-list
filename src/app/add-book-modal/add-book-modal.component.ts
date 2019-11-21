@@ -15,12 +15,11 @@ export class AddBookModalComponent implements OnInit {
 
   constructor( public activeModal: NgbActiveModal) { }
 
-  ngOnInit() {
-  }
+  ngOnInit() {}
 
-  passBack() {
-  	this.passEntry.emit(this.book);
-  	this.activeModal.close('Save click');
+  submit() {
+    this.passEntry.emit(this.book);
+    this.activeModal.close('Save click');
   }
 
   isAdd() {

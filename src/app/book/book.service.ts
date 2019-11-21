@@ -11,6 +11,7 @@ export class BookService {
 	filteredBooks: Book[];
 
 	constructor() {
+		// localStorage.clear();
 		this.books = JSON.parse(localStorage.getItem("books"));
 		if (!this.books) {
 			this.books = BOOKS;
@@ -54,18 +55,22 @@ export class BookService {
 	}
 
 	editBook(bookToBeEdited: Book) {
-		this.books.map(book => {
+		console.log("To be edited:  " + this.consoleLogBook(bookToBeEdited));
+
+		this.books = this.books.map(book => {
 			if (book.id === bookToBeEdited.id) {
-				book = bookToBeEdited;
+				return bookToBeEdited;
+			} else {
+				return book;
 			}
 		});
-		
+
 		this.saveBooksToLocalStorage();
 	}
 
-	consoleLogBook(book: Book) {
-		return "id: " + book.id + "  title: " + book.title + "  price: " + book.price + "   author: " + book.author
-		+ "   image: " + book.image + "   city: " + book.city + "   year: " + book.year 
-		+ "   description: " + book.description;
-	}
+  	consoleLogBook(book: Book) {
+    	return "id: " + book.id + "  title: " + book.title + "  price: " + book.price + "   author: " + book.author
+    		+ "   image: " + book.image + "   city: " + book.city + "   year: " + book.year 
+    		+ "   description: " + book.description;
+  	}
 }

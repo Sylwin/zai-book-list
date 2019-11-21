@@ -81,7 +81,6 @@ export class BookComponent implements OnInit {
 
     modalRef.componentInstance.passEntry.subscribe((receivedEntry) => {
       this.addBook(receivedEntry);
-      console.log(receivedEntry);
     });
   }
 
@@ -93,7 +92,8 @@ export class BookComponent implements OnInit {
     this.books = this.bookService.getBooksFromLocalStorage();
   }
 
-  openEditModal(book) {    
+  openEditModal(book) {
+    console.log("Book to be edited: " + this.consoleLogBook(book));
     const modalRef = this.modalService.open(AddBookModalComponent);
         
     modalRef.componentInstance.type = "EDIT";
@@ -110,7 +110,6 @@ export class BookComponent implements OnInit {
 
     modalRef.componentInstance.passEntry.subscribe((receivedEntry) => {
       this.editBook(receivedEntry);
-      console.log("Received Entry: " + this.consoleLogBook(receivedEntry));
     });
   }
 
