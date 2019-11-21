@@ -101,6 +101,6 @@
 	</form>
 </div>
 <div class="modal-footer">
-	<button *ngIf="isAdd()" type="button" class="btn btn-outline-dark" (click)="submit()" [disabled]="bookForm.invalid">Add Book</button>
-	<button *ngIf="!isAdd()" type="button" class="btn btn-outline-dark" (click)="submit()" [disabled]='bookForm.invalid'>Save Book</button>
+	<button *ngIf="isAdd()" type="button" class="btn btn-success" (click)="submit()" [disabled]="bookForm.invalid">Add Book</button>
+	<button *ngIf="!isAdd()" type="button" class="btn btn-success" (click)="submit()" [disabled]='bookForm.invalid'>Save Book</button>
 </div>

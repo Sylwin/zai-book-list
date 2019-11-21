@@ -10,13 +10,15 @@ import { NgxPaginationModule } from 'ngx-pagination';
 import { FilterPipe } from './filter.pipe';
 import { AddBookModalComponent } from './add-book-modal/add-book-modal.component';
 import { FormsModule } from '@angular/forms';
+import { DeleteBookModalComponent } from './delete-book-modal/delete-book-modal.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     BookComponent,
     FilterPipe,
-    AddBookModalComponent
+    AddBookModalComponent,
+    DeleteBookModalComponent
   ],
   imports: [
     BrowserModule,
@@ -26,7 +28,8 @@ import { FormsModule } from '@angular/forms';
     FormsModule
   ],
   entryComponents: [
-    AddBookModalComponent
+    AddBookModalComponent,
+    DeleteBookModalComponent
   ],
   providers: [],
   bootstrap: [AppComponent]

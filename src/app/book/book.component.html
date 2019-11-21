@@ -8,7 +8,7 @@
 
 	<div class="row mb-4">
 		<div class="col-md-4">
-			<button type="button" class="btn btn-secondary" (click)=openAddModal()>Add Book</button>
+			<button type="button" class="btn btn-outline-secondary" (click)=openAddModal()>Add Book</button>
 		</div>
 		<div class="ml-auto mr-4">
             <div ngbDropdown>
@@ -58,7 +58,7 @@
                         <div class="ml-auto mr-3">
                             <div class="btn-group" role="group" aria-label="Button group example">
                                 <button type="button" class="btn btn-primary" (click)=openEditModal(book)>Edit Book</button>
-                                <button type="button" class="btn btn-danger" (click)="deleteBook(book)">Delete Book</button>
+                                <button type="button" class="btn btn-danger" (click)="openDeleteModal(book)">Delete Book</button>
                             </div>
                         </div>
                     </div>
