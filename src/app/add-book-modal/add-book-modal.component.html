@@ -68,7 +68,7 @@
 						<input [(ngModel)]="book.city" type="text" id="city" name="city" class="form-control" 
 						required #city="ngModel">
 						<input [(ngModel)]="book.year" type="text" id="year" name="year" class="form-control"
-						required #year="ngModel" pattern="[1-2][0-9]{2,3}">
+						required #year="ngModel" pattern="(^1[0-9]{3}$)|(^[1-9][0-9]{2}$)|(^20[0-1][0-9]$)">
 					</div>
 					<div *ngIf="(city.invalid && (city.dirty || city.touched))" class="alert alert-danger">
 						<div *ngIf="city.errors.required">
@@ -80,7 +80,7 @@
 							Year of Publication is required.
 						</div>
 						<div *ngIf="year.errors.pattern">
-							Year of Publication must be a valid number.
+							Year of Publication must be valid.
 						</div>
 					</div>
 
